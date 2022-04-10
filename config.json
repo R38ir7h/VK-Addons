@@ -20,9 +20,9 @@
 				"content": "",
 				"color": "#FF8C00",
 				"author": true,
-				"copyright": Copyright © 2017-2022 Сообщество fw-rebirth.com,
+				"copyright": "Copyright © 2017-2022 Сообщество fw-rebirth.com",
 				"date": true,
-				"exclude_content": [Copyright © 2017-2022 Сообщество fw-rebirth.com]
+				"exclude_content": []
 			}
 		}
 	],

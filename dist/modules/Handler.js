@@ -57,7 +57,7 @@ export class Handler {
     #startInterval() {
         var now = new Date().toLocaleString();
         const { index, vk: { interval, group_id, filter }, discord: { author, copyright, date } } = this.cluster;
-        console.log(now,`[Бот - Феня в деле] Кластер #${index} будет проверять новые записи с интервалом в ${interval} секунд.`);
+        console.log(now,`[Бот Феникс работает] Кластер #${index} будет проверять новые записи с интервалом в ${interval} секунд.`);
         if (interval < 20) {
             console.warn(now,'[!] Не рекомендуем ставить интервал получения постов меньше 20 секунд, во избежания лимитов ВКонтакте!');
         }

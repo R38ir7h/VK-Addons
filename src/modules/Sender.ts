@@ -99,7 +99,7 @@ export class Sender extends Message {
             });
         }
 
-        console.log(`[VK2Discord] Запись в кластере #${index} опубликована.`);
+        console.log(`[Феникс] Запись в кластере #${index} опубликована.`);
     }
 
     async #pushDate(): Promise<void> {

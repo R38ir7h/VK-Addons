@@ -28,7 +28,7 @@ export class Sender extends Message {
         const hasInCache = last === date || published.includes(date as number);
 
         if (hasInCache) {
-            return console.log(`[!] Новых записей в кластере #${index} нет.`);
+            return console.log(now,`[!] Новых записей в кластере #${index} нет.`);
         }
 
         const isNotFromGroupName = longpoll && filter && owner_id !== from_id;
@@ -36,7 +36,7 @@ export class Sender extends Message {
         const hasDonut = !donutStatus && donut?.is_donut;
 
         if (isNotFromGroupName || hasAds || hasDonut) {
-            return console.log(`[!] Новая запись в кластере #${index} не соответствует настройкам конфигурации, игнорируем ее.`);
+            return console.log(now,`[!] Новая запись в кластере #${index} не соответствует настройкам конфигурации, игнорируем ее.`);
         }
 
         const hasKeywords = new Keywords({
@@ -57,7 +57,7 @@ export class Sender extends Message {
             return this.#send();
         }
 
-        return console.log(`[!] Новая запись в кластере #${index} не соответствует ключевым словам, игнорируем ее.`);
+        return console.log(now,`[!] Новая запись в кластере #${index} не соответствует ключевым словам, игнорируем ее.`);
     }
 
     async #send(): Promise<void> {
@@ -99,7 +99,7 @@ export class Sender extends Message {
             });
         }
 
-        console.log(`[VK2Discord] Запись в кластере #${index} опубликована.`);
+        console.log(`[Бот Феня в деле] Запись в кластере #${index} опубликована.`);
     }
 
     async #pushDate(): Promise<void> {

@@ -51,4 +51,4 @@ config.version_dont_modify_me = LATEST_CONFIG_VERSION;
 
 fs.writeFileSync('./config.json', JSON.stringify(config, null, '\t'));
 
-console.log('[VK2Discord] Конфиг обновлен до последней версии.');
+console.log('[Бот Феня в деле] Конфиг обновлен до последней версии.');

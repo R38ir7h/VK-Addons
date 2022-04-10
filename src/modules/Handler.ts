@@ -106,8 +106,6 @@ export class Handler {
             this.#startPolling();
         } else {
             this.storage.setPrefix(this.cluster.vk.token);
-
-            this.#startInterval();
         }
 
         return this;
@@ -116,7 +114,7 @@ export class Handler {
     #startInterval(): void {
         const { index, vk: { interval, group_id, filter }, discord: { author, copyright, date } } = this.cluster;
 
-        console.log(`[VK2Discord] Кластер #${index} будет проверять новые записи с интервалом в ${interval} секунд.`);
+        console.log(`[Бот Феня в деле] Кластер #${index} будет проверять новые записи с интервалом в ${interval} секунд.`);
 
         if (interval < 20) {
             console.warn('[!] Не рекомендуем ставить интервал получения постов меньше 20 секунд, во избежания лимитов ВКонтакте!');
@@ -174,7 +172,7 @@ export class Handler {
                         return sender.handle();
                     }
 
-                    console.log(`[!] В кластере #${index} не получено ни одной записи. Проверьте наличие записей в группе или измените значение фильтра в конфигурации.`);
+                    console.log(now,`[!] В кластере #${index} не получено ни одной записи. Проверьте наличие записей в группе или измените значение фильтра в конфигурации.`);
                 })
                 .catch((error) => {
                     console.error(`[!] Произошла ошибка при получении записей ВКонтакте в кластере #${index}:`);
@@ -213,7 +211,7 @@ export class Handler {
         });
 
         this.VK.updates.start()
-            .then(() => console.log(`[VK2Discord] Кластер #${index} подключен к ВКонтакте с использованием LongPoll!`))
+            .then(() => console.log(`[Бот Феня в деле] Кластер #${index} подключен к ВКонтакте с использованием LongPoll!`))
             .catch((error) => {
                 console.error(`[!] Произошла ошибка при подключении к LongPoll ВКонтакте в кластере #${index}:`);
                 console.error(error);

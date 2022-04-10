@@ -5,7 +5,7 @@ import config from '../config.json' assert { type: 'json' };
 
 const { clusters } = config;
 
-console.log('[Бот Феня в деле] Запущен.');
+console.log('[VK2Discord] Запущен.');
 
 const handlers = await Promise.all(
     clusters.map((cluster, index) => (

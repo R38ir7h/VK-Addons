@@ -1,0 +1,30 @@
+{
+	"clusters": [
+		{
+			"vk": {
+				"token": "Токен от станицы или группы ВКонтакте",
+				"group_id": "club1",
+				"keywords": [],
+				"words_blacklist": [],
+				"filter": true,
+				"donut": false,
+				"ads": false,
+				"interval": 30
+			},
+			"discord": {
+				"webhook_urls": [
+					"https://discordapp.com/api/webhooks/"
+				],
+				"username": "",
+				"avatar_url": "",
+				"content": "",
+				"color": "#aabbcc",
+				"author": true,
+				"copyright": true,
+				"date": true,
+				"exclude_content": []
+			}
+		}
+	],
+	"version_dont_modify_me": 5
+}

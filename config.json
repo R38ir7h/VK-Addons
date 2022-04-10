@@ -16,14 +16,14 @@
 				"webhook_urls": [
 					"https://discord.com/api/webhooks/962589852912734278/-NfBX4uToLVqiVXyRoOA0yVmZwJ8EmELdmomNJH2OMG0jdJG6S_UNuokZHAOu7drNsNc"
 				],
-				"username": "Forsaken World | Rebirth | Феня",
+				"username": "Феникс",
 				"avatar_url": "",
 				"content": "",
 				"color": "#FF8C00",
 				"author": true,
 				"copyright": true,
 				"date": true,
-				"exclude_content": []
+				"exclude_content": [123]
 			}
 		}
 	],

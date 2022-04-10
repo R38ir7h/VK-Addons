@@ -69,7 +69,7 @@ export class Sender extends Message {
             });
         }
 
-        console.log(`[Бот Феня в деле] Запись в кластере #${index} опубликована.`);
+        console.log(`[Бот Феникс работает] Запись в кластере #${index} опубликована.`);
     }
     async #pushDate() {
         const { cluster: { vk: { group_id }, storage }, payload: { date } } = this;

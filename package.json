@@ -16,15 +16,15 @@
     "eslint:github-action": "eslint ./src/**/*",
     "eslint:fix": "eslint ./src/**/* --fix"
   },
-  "homepage": "https://github.com/MrZillaGold/VK2Discord#readme",
+  "homepage": "https://github.com/R38ir7h/VK-Addons#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/MrZillaGold/VK2Discord.git"
+    "url": "https://github.com/R38ir7h/VK-Addons.git"
   },
-  "author": "MrZillaGold <Pronin Egor | mrzillagold@gmail.com>",
+  "author": "Developer Community",
   "license": "SEE LICENSE IN LICENSE.txt",
   "bugs": {
-    "url": "https://github.com/MrZillaGold/VK2Discord/issues"
+    "url": "https://github.com/R38ir7h/VK-Addons/issues"
   },
   "dependencies": {
     "@discordjs/builders": "^0.12.0",

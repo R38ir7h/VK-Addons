@@ -23,7 +23,7 @@
 				"author": true,
 				"copyright": true,
 				"date": true,
-				"exclude_content": ["ыцйу"]
+				"exclude_content": []
 			}
 		}
 	],

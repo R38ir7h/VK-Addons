@@ -10,6 +10,8 @@
 				"donut": false,
 				"ads": false,
 				"interval": 30
+//club139358441 реберт
+//public211757627 тест
 			},
 			"discord": {
 				"webhook_urls": [
@@ -28,5 +30,4 @@
 	],
 	"version_dont_modify_me": 5
 }
-#club139358441
-#public211757627
+

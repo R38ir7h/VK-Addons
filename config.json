@@ -15,14 +15,14 @@
 				"webhook_urls": [
 					"https://discord.com/api/webhooks/962589852912734278/-NfBX4uToLVqiVXyRoOA0yVmZwJ8EmELdmomNJH2OMG0jdJG6S_UNuokZHAOu7drNsNc"
 				],
-				"username": "",
+				"username": "Forsaken World | Rebirth | Феня",
 				"avatar_url": "",
 				"content": "",
-				"color": "#aabbcc",
+				"color": "#FF8C00",
 				"author": true,
-				"copyright": true,
+				"copyright": Copyright © 2017-2022 Сообщество fw-rebirth.com,
 				"date": true,
-				"exclude_content": []
+				"exclude_content": [Copyright © 2017-2022 Сообщество fw-rebirth.com]
 			}
 		}
 	],

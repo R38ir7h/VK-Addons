@@ -2,8 +2,8 @@
 	"clusters": [
 		{
 			"vk": {
-				"token": "187e8156b4a03b83fe291496f57c9c30db39da5781b9ddd06ecfaf1d9fa7fa642a8d3bacd979e2f68c8ec",
-				"group_id": "public211757627",
+				"token": "Токен от станицы или группы ВКонтакте",
+				"group_id": "club1",
 				"keywords": [],
 				"words_blacklist": [],
 				"filter": true,
@@ -13,14 +13,14 @@
 			},
 			"discord": {
 				"webhook_urls": [
-					"https://discord.com/api/webhooks/962589852912734278/-NfBX4uToLVqiVXyRoOA0yVmZwJ8EmELdmomNJH2OMG0jdJG6S_UNuokZHAOu7drNsNc"
+					"https://discordapp.com/api/webhooks/"
 				],
-				"username": "Forsaken World | Rebirth | Феня",
+				"username": "",
 				"avatar_url": "",
 				"content": "",
-				"color": "#FF8C00",
+				"color": "#aabbcc",
 				"author": true,
-				"copyright": "Copyright © 2017-2022 Сообщество fw-rebirth.com",
+				"copyright": true,
 				"date": true,
 				"exclude_content": []
 			}

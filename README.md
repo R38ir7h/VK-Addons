@@ -1,4 +1,3 @@
-
 Установка (консоль Shell):
 
 npm install -g npm@8.19.2
@@ -24,3 +23,15 @@ https://regvk.com/id/
 				"copyright": true, - указивает копирайт
 				"date": true, - уазивает время поста
 				"exclude_content": [] - запрещает контент
+
+Добавляем мониторинг на https://uptimerobot.com:
+копируем ссылку "пример: https://VK-Addons.forsakenworld.repl.co"
+Авторизуемся на https://uptimerobot.com/
+жмем Add New Monitor
+Monitor Type - HTTP(s)
+Friendly Name - Вестник Феникса
+URL (or IP) - https://VK-Addons.forsakenworld.repl.co (пример, копируется непосредственно с окна над терминалом)
+Monitoring Interval - every 5 minutes
+Monitor Timeout - in 30 seconds
+HTTP Method - HEAD
+Завершаем настройку - жмем "Create Monitor"

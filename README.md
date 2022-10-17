@@ -11,7 +11,7 @@ https://oauth.vk.com/authorize?client_id=6121396&scope=1073737727&redirect_uri=h
 https://regvk.com/id/
 - определяем ИД групп, копируем в "group_id"
 
-- берем вебхук с интаграции сервера в дискорде и копируем в "webhook_urls"
+- берем вебхук с интеграции сервера в дискорде и копируем в "webhook_urls"
 
 - даем имя боту в "username"
 

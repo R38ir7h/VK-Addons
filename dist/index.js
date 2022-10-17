@@ -2,7 +2,15 @@ import { Handler, Storage } from './modules';
 // @ts-ignore
 import config from '../config.json' assert { type: 'json' };
 const { clusters } = config;
-const server = require('server');
+import express from 'express';
+var app = express();
+var server = app.listen(5001);
+
+server.on('connection', function(socket) {
+  console.log("A new connection was made by a client.");
+  socket.setTimeout(30 * 1000); 
+  // 30 second timeout. Change this as you see fit.
+});
 var now = new Date().toLocaleString();
 console.log(now, "Поздравляю! Сервер запущен.");
 console.log("Весия ноды:", process.version );

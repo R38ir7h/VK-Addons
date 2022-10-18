@@ -2,17 +2,23 @@ import { Handler, Storage } from './modules';
 // @ts-ignore
 import config from '../config.json' assert { type: 'json' };
 const { clusters } = config;
-import express from 'express';
-var app = express();
-var server = app.listen(5001);
 
-server.on('connection', function(socket) {
-  console.log("A new connection was made by a client.");
-  socket.setTimeout(30 * 1000); 
-  // 30 second timeout. Change this as you see fit.
+import express from 'express';
+
+const app = express();
+const port = process.env.PORT || 3000;
+
+
+app.get('/',(req,res)=>{
+   res.sendFile('./index.html', { root: '.' })
+})
+
+app.listen( port ,()=>{
+    console.log('ервер запущен, порт: 3000')
 });
+
 var now = new Date().toLocaleString();
-console.log(now, "Поздравляю! Сервер запущен.");
+
 console.log("Весия ноды:", process.version );
 console.log('[Бот - Феня] разработан по заказу сообщества Forsaken World | Rebirth.');
 console.log('[Бот - Феня] является собственностю сервера Forsaken World | Rebirth. Все права на "Бот - Феня" принадлежат его правообладателям.');

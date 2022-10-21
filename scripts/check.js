@@ -1,14 +1,15 @@
 import { promises as fs } from 'fs';
 
 import { LATEST_CONFIG_VERSION, NODE_MAJOR_VERSION, ENGINE_SUPPORT_VERSION } from './constants';
-
+var d = new Date();
+var datetime = d.toLocaleString();
 if (NODE_MAJOR_VERSION < ENGINE_SUPPORT_VERSION) {
     throw `\n\n[!] Для запуска скрипта необходим Node.js ${ENGINE_SUPPORT_VERSION} или выше!\n\n`;
 }
 
 const files = await fs.readdir('./')
     .catch((error) => {
-        console.warn('[!] Ошибка при получении файлов из папки со скриптом. Проверить наличие конфига не удастся.');
+        console.warn("\x1b[33m",  datetime, '\x1b[0m', '[!] Ошибка при получении файлов из папки со скриптом. Проверить наличие конфига не удастся.');
         console.error(error);
 
         return null;
@@ -22,7 +23,7 @@ if (files) {
                     await rename();
                     await createConfig();
 
-                    console.error('\n\n[!] Версия конфига не соответствует текущей, файл был переименован в config_old.json. Был создан новый файл, настройте его следуя инструкции либо примените обновление при помощи скрипта npm run update.\n\n');
+                    console.error("\x1b[31m",  datetime, '\x1b[0m', '\n\n[!] Версия конфига не соответствует текущей, файл был переименован в config_old.json. Был создан новый файл, настройте его следуя инструкции либо примените обновление при помощи скрипта npm run update.\n\n');
 
                     process.exit(-1);
                 }
@@ -32,14 +33,14 @@ if (files) {
               /*  await rename();
                 await createConfig();*/
 
-                console.error('\n\n[!] Конфиг поврежден либо настроен неправильно, файл был переименован в config_old.json. Был создан новый файл, настройте его следуя инструкции.\n\n');
+                console.error("\x1b[31m",  datetime, '\x1b[0m', '\n\n[!] Конфиг поврежден либо настроен неправильно, файл был переименован в config_old.json. Был создан новый файл, настройте его следуя инструкции.\n\n');
 
                 process.exit(-1);
             });
     } else {
         await createConfig();
 
-        console.warn('\n\n[!] Конфиг в папке со скриптом не обнаружен, создан новый файл. Настройте его следуя инструкции.\n\n');
+        console.warn("\x1b[33m",  datetime, '\x1b[0m', '\n\n[!] Конфиг в папке со скриптом не обнаружен, создан новый файл. Настройте его следуя инструкции.\n\n');
 
         process.exit(-1);
     }

@@ -2,23 +2,24 @@
 	"clusters": [
 		{
 			"vk": {
-				"token": "сюда токен",
+				"token": "супер секретный токен с ВК",
 				"group_id": "club139358441",
 				"keywords": [],
 				"words_blacklist": [],
 				"filter": true,
+        "longpool": true,
 				"donut": false,
 				"ads": false,
-				"interval": 30
+				"interval": 5
 
 			},	
 			"discord": {
 				"webhook_urls": [
-					"тут вебхук"
+					"супер секретный вебхук сервера"
 				],
-				"username": "Феникс",
+				"username": "Вестник Феникса",
 				"avatar_url": "",
-				"content": "<@&945603722346635264>**, обрати внимание, вышел новый пост.** ",
+				"content": "<@&957592844040798258>**, обрати внимание, вышел новый пост.** ",
 				"color": "#FF8C00",
 				"author": true,
 				"copyright": true,

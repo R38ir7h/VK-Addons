@@ -2,6 +2,8 @@ import { WebhookClient } from 'discord.js';
 import { Keywords, KeywordsType } from './Keywords';
 import { Message } from './Message';
 import { FieldType } from './Storage';
+var d = new Date();
+var datetime = d.toLocaleString();
 export class Sender extends Message {
     payload;
     constructor(cluster, payload) {
@@ -18,13 +20,13 @@ export class Sender extends Message {
         ]);
         const hasInCache = last === date || published.includes(date);
         if (hasInCache) {
-            return console.log(now,`[!] Новых записей в кластере #${index} нет.`);
+            return console.log("\x1b[33m", datetime, '\x1b[0m', now,`[!] Новых записей в кластере #${index} нет.`);
         }
         const isNotFromGroupName = longpoll && filter && owner_id !== from_id;
         const hasAds = !ads && marked_as_ads;
         const hasDonut = !donutStatus && donut?.is_donut;
         if (isNotFromGroupName || hasAds || hasDonut) {
-            return console.log(now,`[!] Новая запись в кластере #${index} не соответствует настройкам конфигурации, игнорируем ее.`);
+            return console.log("\x1b[31m", datetime, '\x1b[0m', now,`[!] Новая запись в кластере #${index} не соответствует настройкам конфигурации, игнорируем ее.`);
         }
         const hasKeywords = new Keywords({
             type: KeywordsType.KEYWORDS,
@@ -40,7 +42,7 @@ export class Sender extends Message {
             await this.parsePost();
             return this.#send();
         }
-        return console.log(now,`[!] Новая запись в кластере #${index} не соответствует ключевым словам, игнорируем ее.`);
+        return console.log("\x1b[33m", datetime, '\x1b[0m', now,`[!] Новая запись в кластере #${index} не соответствует ключевым словам, игнорируем ее.`);
     }
     async #send() {
         const { post, repost, embeds: [embed], cluster: { index, discord: { webhook_urls, content, username, avatar_url: avatarURL } } } = this;
@@ -64,12 +66,12 @@ export class Sender extends Message {
         const rejects = results.filter(({ status }) => status === 'rejected');
         if (rejects.length) {
             return rejects.forEach(({ reason }) => {
-                console.error(`[!] Произошла ошибка при отправке сообщения в кластере #${index}:`);
+                console.error("\x1b[31m", datetime, '\x1b[0m', `[!] Произошла ошибка при отправке сообщения в кластере #${index}:`);
                 console.error(reason);
             });
         }
 
-        console.log(`[Бот Феникс работает] Запись в кластере #${index} опубликована.`);
+        console.log("\x1b[32m", datetime, '\x1b[0m', `[Бот Феникс работает] Запись в кластере #${index} опубликована.`);
     }
     async #pushDate() {
         const { cluster: { vk: { group_id }, storage }, payload: { date } } = this;

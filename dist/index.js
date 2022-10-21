@@ -2,11 +2,12 @@ import { Handler, Storage } from './modules';
 // @ts-ignore
 import config from '../config.json' assert { type: 'json' };
 const { clusters } = config;
-
+var d = new Date();
+var datetime = d.toLocaleString();
 import express from 'express';
 
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8080;
 
 
 app.get('/',(req,res)=>{
@@ -14,15 +15,15 @@ app.get('/',(req,res)=>{
 })
 
 app.listen( port ,()=>{
-    console.log('ервер запущен, порт: 3000')
+    console.log("\x1b[32m", datetime, '\x1b[0m', 'WEB-Cервер запущен', "\x1b[31m", 'порт: 8080', '\x1b[0m', )
 });
 
-var now = new Date().toLocaleString();
 
-console.log("Весия ноды:", process.version );
-console.log('[Бот - Феня] разработан по заказу сообщества Forsaken World | Rebirth.');
-console.log('[Бот - Феня] является собственностю сервера Forsaken World | Rebirth. Все права на "Бот - Феня" принадлежат его правообладателям.');
-console.log('[Бот - Феня] Запущен.');
+console.log("\x1b[36m", datetime, '\x1b[0m', "Весия ноды:", process.version );
+console.log("\x1b[36m", datetime, '\x1b[0m', '[Бот - Феня] разработан по заказу сообщества Forsaken World | Rebirth.');
+console.log("\x1b[36m", datetime, '\x1b[0m', '[Бот - Феня] Является собственностю сервера Forsaken World | Rebirth.');
+console.log("\x1b[36m", datetime, '\x1b[0m', '[Бот - Феня] Все права на "Бот - Феня" принадлежат его правообладателям.');
+console.log("\x1b[32m", datetime, '\x1b[0m', '[Бот - Феня] Запущен.');
 const handlers = await Promise.all(clusters.map((cluster, index) => (new Handler({
     ...cluster,
     index: index + 1

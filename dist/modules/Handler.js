@@ -2,8 +2,9 @@ import { Sender } from './Sender';
 import { Storage } from './Storage';
 import { VK, TokenType } from './VK';
 import { getById, getPostAuthor, getPostLink, getResourceId } from '../utils';
-var d = new Date();
-var datetime = d.toLocaleString();
+import colors from 'colors';
+import moment from 'moment';
+moment.locale(`ru`);
 export var Exclude;
 (function (Exclude) {
     Exclude["TEXT"] = "text";
@@ -28,7 +29,7 @@ export class Handler {
         });
     }
     async init() {
-        var now = new Date().toLocaleString();
+        var now = new moment().format('MMMM Do YYYY, h:mm:ss a');
         const { api } = this.VK;
         const [users, groups] = await Promise.allSettled([
             api.users.get({}),
@@ -57,17 +58,17 @@ export class Handler {
         return this;
     }
     #startInterval() {
-        var now = new Date().toLocaleString();
+        var now = new moment().format('MMMM Do YYYY, h:mm:ss a');
         const { index, vk: { interval, group_id, filter }, discord: { author, copyright, date } } = this.cluster;
-        console.log("\x1b[32m", datetime, '\x1b[0m', now,`[Бот Феникс работает] Кластер #${index} будет проверять новые записи с интервалом в ${interval} секунд.`);
+        console.log(now.green, `[Бот Феникс работает] Кластер #${index} будет проверять новые записи с интервалом в ${interval} секунд.`);
         if (interval < 20) {
-            console.warn("\x1b[33m", datetime, '\x1b[0m', now,'[!] Не рекомендуем ставить интервал получения постов меньше 20 секунд, во избежания лимитов ВКонтакте!');
+            console.warn(now.yellow, '[!] Не рекомендуем ставить интервал получения постов меньше 20 секунд, во избежания лимитов ВКонтакте!');
         }
         setInterval(async () => {
             const id = await getResourceId(this.VK, group_id)
                 .then((id) => {
                 if (!id) {
-                    return console.error("\x1b[31m", datetime, '\x1b[0m', `[!] ${group_id} не является ID-пользователя или группы ВКонтакте!`);
+                    return console.error(now.red, `[!] ${group_id} не является ID-пользователя или группы ВКонтакте!`);
                 }
                 return id;
             });
@@ -102,15 +103,16 @@ export class Handler {
                     }
                     return sender.handle();
                 }
-                console.log("\x1b[31m", datetime, '\x1b[0m', now,`[!] В кластере #${index} не получено ни одной записи. Проверьте наличие записей в группе или измените значение фильтра в конфигурации.`);
+                console.log(now.yellow, `[!] В кластере #${index} не получено ни одной записи. Проверьте наличие записей в группе или измените значение фильтра в конфигурации.`);
             })
                 .catch((error) => {
-                console.error("\x1b[31m", datetime, '\x1b[0m', `[!] Произошла ошибка при получении записей ВКонтакте в кластере #${index}:`);
+                console.error(now.red, `[!] Произошла ошибка при получении записей ВКонтакте в кластере #${index}:`);
                 console.error(error);
             });
         }, interval * 1000);
     }
     #startPolling() {
+      var now = new moment().format('MMMM Do YYYY, h:mm:ss a');
         const { index, discord: { author, copyright, date } } = this.cluster;
         this.VK.updates.on('wall_post_new', async (context) => {
             const payload = context['payload'];
@@ -131,9 +133,9 @@ export class Handler {
             }
         });
         this.VK.updates.start()
-            .then(() => console.log("\x1b[32m", datetime, '\x1b[0m', `[Бот Феня в деле] Кластер #${index} подключен к ВКонтакте с использованием LongPoll!`))
+            .then(() => console.log(now.green, `[Вестник Феникса] Кластер #${index} подключен к ВКонтакте с использованием LongPoll!`))
             .catch((error) => {
-            console.error("\x1b[31m", datetime, '\x1b[0m', `[!] Произошла ошибка при подключении к LongPoll ВКонтакте в кластере #${index}:`);
+            console.error(now.red, `[!] Произошла ошибка при подключении к LongPoll ВКонтакте в кластере #${index}:`);
             console.error(error);
         });
     }

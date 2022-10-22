@@ -1,7 +1,10 @@
 Установка (консоль Shell):
-
 npm install -g npm@8.19.2
 npm install node@18.11.0
+npm install express
+npm install morgan express --save
+npm install moment --save
+npm install colors
 npm i
 
 Получение токена VK и настройка config.json: 

@@ -2,8 +2,10 @@ import { WebhookClient } from 'discord.js';
 import { Keywords, KeywordsType } from './Keywords';
 import { Message } from './Message';
 import { FieldType } from './Storage';
-var d = new Date();
-var datetime = d.toLocaleString();
+import colors from 'colors';
+import moment from 'moment';
+moment.locale(`ru`);
+
 export class Sender extends Message {
     payload;
     constructor(cluster, payload) {
@@ -11,7 +13,7 @@ export class Sender extends Message {
         this.payload = payload;
     }
     async handle() {
-        var now = new Date().toLocaleString();
+        var now = new moment().format('MMMM Do YYYY, h:mm:ss a');
         const { index, storage, vk: { longpoll, filter, group_id, keywords, ads, donut: donutStatus, words_blacklist } } = this.cluster;
         const { date, owner_id, from_id, marked_as_ads, donut, text } = this.payload;
         const [last, published] = await Promise.all([
@@ -20,13 +22,13 @@ export class Sender extends Message {
         ]);
         const hasInCache = last === date || published.includes(date);
         if (hasInCache) {
-            return console.log("\x1b[33m", datetime, '\x1b[0m', now,`[!] Новых записей в кластере #${index} нет.`);
+            return console.log(now.yellow, `[!] Новых записей в кластере #${index} нет.`);
         }
         const isNotFromGroupName = longpoll && filter && owner_id !== from_id;
         const hasAds = !ads && marked_as_ads;
         const hasDonut = !donutStatus && donut?.is_donut;
         if (isNotFromGroupName || hasAds || hasDonut) {
-            return console.log("\x1b[31m", datetime, '\x1b[0m', now,`[!] Новая запись в кластере #${index} не соответствует настройкам конфигурации, игнорируем ее.`);
+            return console.log(now.red, `[!] Новая запись в кластере #${index} не соответствует настройкам конфигурации, игнорируем ее.`);
         }
         const hasKeywords = new Keywords({
             type: KeywordsType.KEYWORDS,
@@ -42,9 +44,10 @@ export class Sender extends Message {
             await this.parsePost();
             return this.#send();
         }
-        return console.log("\x1b[33m", datetime, '\x1b[0m', now,`[!] Новая запись в кластере #${index} не соответствует ключевым словам, игнорируем ее.`);
+        return console.log(now.yellow, `[!] Новая запись в кластере #${index} не соответствует ключевым словам, игнорируем ее.`);
     }
     async #send() {
+        var now = new moment().format('MMMM Do YYYY, h:mm:ss a');
         const { post, repost, embeds: [embed], cluster: { index, discord: { webhook_urls, content, username, avatar_url: avatarURL } } } = this;
         embed.setDescription(post + repost);
         await this.#pushDate();
@@ -66,12 +69,13 @@ export class Sender extends Message {
         const rejects = results.filter(({ status }) => status === 'rejected');
         if (rejects.length) {
             return rejects.forEach(({ reason }) => {
-                console.error("\x1b[31m", datetime, '\x1b[0m', `[!] Произошла ошибка при отправке сообщения в кластере #${index}:`);
+                console.error(now.red, `[!] Произошла ошибка при отправке сообщения в кластере #${index}:`);
                 console.error(reason);
             });
         }
 
-        console.log("\x1b[32m", datetime, '\x1b[0m', `[Бот Феникс работает] Запись в кластере #${index} опубликована.`);
+        console.log(now.brightGreen, `[Вестник Феникса], \x1b[36m ПОСТ: \x1b[0m \n \x1b[33m${post}\x1b[0m \x1b[36m Опубликован в DISCORD! \x1b[0m`);
+
     }
     async #pushDate() {
         const { cluster: { vk: { group_id }, storage }, payload: { date } } = this;

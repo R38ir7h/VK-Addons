@@ -2,28 +2,48 @@ import { Handler, Storage } from './modules';
 // @ts-ignore
 import config from '../config.json' assert { type: 'json' };
 const { clusters } = config;
-var d = new Date();
-var datetime = d.toLocaleString();
+import moment from 'moment';
+import fs from 'fs';
+import util from 'util';
 import express from 'express';
+import os from 'os';
+import morgan from 'morgan';
+moment.locale(`ru`);
 
+var now = new moment().format('MMMM Do YYYY, h:mm:ss a');
 const app = express();
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 3000;
+var accessLogStream = fs.createWriteStream('log.log', { flags: 'a' });
+app.use(morgan('combined', { stream: accessLogStream }));
+var logFile = fs.createWriteStream('log.log', { flags: 'a' });
+var logStdout = process.stdout;
+if(os.hostname()) {
+    var hostname = os.hostname();
+    console.log(now.brightBlue, `Hostname for the operating`
+        + " system is " + String(hostname));
+}
+console.log = function () {
+  logFile.write(util.format.apply(null, arguments) + '\n');
+  logStdout.write(util.format.apply(null, arguments) + '\n');
+}
+console.error = console.log;
 
+morgan.token('host', function(req, res) {
+return req.hostname;
+});
 
-app.get('/',(req,res)=>{
-   res.sendFile('./index.html', { root: '.' })
-})
-
-app.listen( port ,()=>{
-    console.log("\x1b[32m", datetime, '\x1b[0m', 'WEB-Cервер запущен', "\x1b[31m", 'порт: 8080', '\x1b[0m', )
+app.use(morgan(':method :host :status :res[content-length] - :response-time ms'));
+app.get("/", (req, res) => {
+   res.sendFile('./log.log', { root: '.' })
+});
+app.listen(port, ()=>{
+    console.log(now.brightBlue, 'WEB-Cервер запущен', "\x1b[31m", 'порт:', port, '\x1b[0m', )
+  
 });
 
 
-console.log("\x1b[36m", datetime, '\x1b[0m', "Весия ноды:", process.version );
-console.log("\x1b[36m", datetime, '\x1b[0m', '[Бот - Феня] разработан по заказу сообщества Forsaken World | Rebirth.');
-console.log("\x1b[36m", datetime, '\x1b[0m', '[Бот - Феня] Является собственностю сервера Forsaken World | Rebirth.');
-console.log("\x1b[36m", datetime, '\x1b[0m', '[Бот - Феня] Все права на "Бот - Феня" принадлежат его правообладателям.');
-console.log("\x1b[32m", datetime, '\x1b[0m', '[Бот - Феня] Запущен.');
+console.log(now.brightBlue, "Весия ноды:", process.version );
+console.log(now.brightBlue, '[Вестник Феникса] Запущен.');
 const handlers = await Promise.all(clusters.map((cluster, index) => (new Handler({
     ...cluster,
     index: index + 1

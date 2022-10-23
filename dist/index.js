@@ -32,7 +32,7 @@ morgan.token('host', function(req, res) {
 return req.hostname;
 });
 
-app.use(morgan(':method :host :status :res[content-length] - :response-time ms'));
+app.use(morgan(':date[web] :method :host :status :res[content-length] - :response-time ms'));
 app.get("/", (req, res) => {
    res.sendFile('./log.log', { root: '.' })
 });
